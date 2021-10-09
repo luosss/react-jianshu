@@ -1,0 +1,97 @@
+.box {
+  .headerwrapp {
+    border-bottom: 1px solid #f0f0f0;
+    .header {
+      height: 56px;
+      line-height: 56px;
+      width: 768px;
+      width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      a {
+        flex: 1;
+        img {
+          width: 100px;
+          height: 56px;
+        }
+      }
+      .center {
+        flex: 5;
+        display: flex;
+        ul {
+          display: flex;
+          justify-content: space-around;
+          width: 900px;
+          li {
+            font-size: 18px;
+            color: rgb(51, 51, 51);
+            a {
+              display: block;
+              i {
+                vertical-align: top;
+              }
+            }
+            .redpacketdiv {
+              position: relative;
+              .redpacket {
+                width: 94px;
+                height: 40px;
+                vertical-align: middle;
+              }
+              a {
+                position: absolute;
+                right: 16px;
+                top: 0;
+                color: #fff;
+                font-size: 15px;
+              }
+            }
+          }
+          .search {
+            position: relative;
+            input {
+              border-radius: 40px;
+              background: #eee;
+              width: 240px;
+              height: 38px;
+              border: none;
+              outline: none;
+              text-indent: 10px;
+            }
+            i {
+              position: absolute;
+              right: 10px;
+              top: 2px;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+      .right {
+        flex: 3;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 120px;
+        div {
+          color: rgb(150, 145, 145);
+          i {
+            vertical-align: middle;
+          }
+          &.edit {
+            background-color: #ea6f5a;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 20px;
+            margin-top: 8px;
+            text-align: center;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+.iconfont {
+  font-size: 25px;
+}
