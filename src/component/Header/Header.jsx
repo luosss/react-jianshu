@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
+// import  * as actionCreators  from './store/actionCreators'
+import { actionCreators } from "./store";
 import { CSSTransition} from "react-transition-group";
 import "./Header.scss";
 import logo from "../../statics/logo.png";
@@ -159,16 +161,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     inputFocus() {
-      const action = {
-        type: 'search_focus'
-      }
-      dispatch(action)
+      dispatch(actionCreators.searchFoucus())
     },
     inputBlur() {
-      const action = {
-        type: 'search_blur'
-      }
-      dispatch(action)
+      dispatch(actionCreators.searchBlur())
     }
   }
 }
