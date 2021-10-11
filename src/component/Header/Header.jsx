@@ -155,7 +155,8 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   
   return {
-    focused: state.header.get('focused')  //由于将store放到了组件自身目录下的reducer,所以需要加个header
+    // focused: state.get('header').get('focused')  //由于将store放到了组件自身目录下的reducer,所以需要加个header
+    focused: state.getIn(['header','focused'])
   }
 }
 const mapDispatchToProps = (dispatch) => {
