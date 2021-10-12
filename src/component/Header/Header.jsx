@@ -78,7 +78,8 @@ class Header extends Component {
     this.state = {};
   }
   getListArea = () => {
-    if (this.props.focused) {
+    const { focused, list } = this.props;
+    if (focused) {
       return (
         <div className="searchInfo">
           <div className="searchTop">
@@ -89,7 +90,7 @@ class Header extends Component {
             </div>
           </div>
           <div className="searchContent">
-            {this.props.list.map((item) => {
+            {list.map((item) => {
               return <div key={item}>{item}</div>;
             })}
           </div>
@@ -110,6 +111,7 @@ class Header extends Component {
     });
   };
   render() {
+    const { focused, inputFocus, inputBlur } = this.props;
     return (
       <div className="box">
         <div className="headerwrapp">
@@ -137,16 +139,12 @@ class Header extends Component {
                     <span>IT技术</span>
                   </a>
                 </li>
-                <CSSTransition
-                  in={this.props.focused}
-                  timeout={1000}
-                  classNames="slide"
-                >
+                <CSSTransition in={focused} timeout={1000} classNames="slide">
                   <li className="search ">
                     <input
                       type="text"
-                      onFocus={this.props.inputFocus}
-                      onBlur={this.props.inputBlur}
+                      onFocus={inputFocus}
+                      onBlur={inputBlur}
                     />
                     <i className="iconfont">&#xe601;</i>
                     {this.getListArea()}
