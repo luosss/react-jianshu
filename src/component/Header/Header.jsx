@@ -78,22 +78,44 @@ class Header extends Component {
     this.state = {};
   }
   getListArea = () => {
-    const { focused, list } = this.props;
-    if (focused) {
+    const {
+      focused,
+      list,
+      page,
+      totalPage,
+      mouseIn,
+      searchInfoEnter,
+      searchInfoLeave,
+      changePage,
+    } = this.props;
+    const jsList = list.toJS(); //转换为普通js
+    const pageList = [];
+    if (jsList.length) {
+      for (let i = (page - 1) * 10; i < page * 10; i++) {
+        pageList.push(<div key={i}>{jsList[i]}</div>);
+      }
+    }
+
+    if (focused || mouseIn) {
       return (
-        <div className="searchInfo">
+        <div
+          className="searchInfo"
+          onMouseEnter={searchInfoEnter}
+          onMouseLeave={searchInfoLeave}
+        >
           <div className="searchTop">
             <div className="searchinfoTitle">热门搜索</div>
-            <div className="searchSwitch">
+            <div
+              className="searchSwitch"
+              onClick={() => {
+                changePage(page, totalPage);
+              }}
+            >
               <i className="iconfont">&#xe66d;</i>
               <span>换一换</span>
             </div>
           </div>
-          <div className="searchContent">
-            {list.map((item) => {
-              return <div key={item}>{item}</div>;
-            })}
-          </div>
+          <div className="searchContent">{pageList}</div>
         </div>
       );
     } else {
@@ -181,6 +203,9 @@ const mapStateToProps = (state) => {
     // focused: state.get('header').get('focused')  //由于将store放到了组件自身目录下的reducer,所以需要加个header
     focused: state.getIn(["header", "focused"]),
     list: state.getIn(["header", "list"]),
+    page: state.getIn(["header", "page"]),
+    totalPage: state.getIn(["header", "totalPage"]),
+    mouseIn: state.getIn(["header", "mouseIn"]),
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -191,6 +216,20 @@ const mapDispatchToProps = (dispatch) => {
     },
     inputBlur() {
       dispatch(actionCreators.searchBlur());
+    },
+    searchInfoEnter() {
+      dispatch(actionCreators.searchInfoMouseEnter());
+    },
+    searchInfoLeave() {
+      dispatch(actionCreators.searchInfoMouseLeave());
+    },
+    changePage(page, totalPage) {
+      console.log(page, totalPage);
+      if (page < totalPage) {
+        dispatch(actionCreators.changePage(page + 1));
+      } else {
+        dispatch(actionCreators.changePage(1));
+      }
     },
   };
 };
