@@ -108,11 +108,18 @@ class Header extends Component {
             <div
               className="searchSwitch"
               onClick={() => {
-                changePage(page, totalPage);
+                changePage(page, totalPage, this.spinIcon);
               }}
             >
-              <i className="iconfont">&#xe66d;</i>
-              <span>换一换</span>
+              <i
+                ref={(icon) => {
+                  this.spinIcon = icon;
+                }}
+                className="iconfont"
+              >
+                &#xe66d;
+              </i>
+              <span>换一批</span>
             </div>
           </div>
           <div className="searchContent">{pageList}</div>
@@ -223,8 +230,15 @@ const mapDispatchToProps = (dispatch) => {
     searchInfoLeave() {
       dispatch(actionCreators.searchInfoMouseLeave());
     },
-    changePage(page, totalPage) {
-      console.log(page, totalPage);
+    changePage(page, totalPage, spin) {
+      let originAangle = spin.style.transform.replace(/[^0-9]/gi, "");
+      if (originAangle) {
+        originAangle = parseInt(originAangle, 10);
+      } else {
+        originAangle = 0;
+      }
+      debugger;
+      spin.style.transform = `rotate(${originAangle + 360}deg)`;
       if (page < totalPage) {
         dispatch(actionCreators.changePage(page + 1));
       } else {

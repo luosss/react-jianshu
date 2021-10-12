@@ -113,7 +113,11 @@
                 .searchSwitch {
                   font-size: 14px;
                   > i {
+                    display: inline-block;
                     font-size: 14px;
+                    margin-right: 2px;
+                    transition: all 0.2s ease-in;
+                    transform-origin: center center;
                   }
                 }
               }
