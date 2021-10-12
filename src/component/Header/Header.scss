@@ -87,11 +87,48 @@
                 // width: 200px;
               }
             }
-            i {
+            > i {
               position: absolute;
               right: 10px;
               top: 2px;
               font-size: 15px;
+            }
+            .searchInfo {
+              position: absolute;
+              left: 0;
+              top: 56px;
+              width: 240px;
+              box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+              padding: 10px 10px;
+              color: #969696;
+              .searchTop {
+                display: flex;
+                justify-content: space-between;
+                .searchinfoTitle {
+                  margin-top: 20px;
+                  margin-bottom: 15px;
+                  line-height: 20px;
+                  font-size: 14px;
+                }
+                .searchSwitch {
+                  font-size: 14px;
+                  > i {
+                    font-size: 14px;
+                  }
+                }
+              }
+              .searchContent {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-gap: 10px 12px;
+                div {
+                  line-height: 20px;
+                  border: 1px solid #eee;
+                  padding: 5px;
+                  font-size: 14px;
+                  text-align: center;
+                }
+              }
             }
           }
         }

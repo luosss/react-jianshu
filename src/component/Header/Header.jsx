@@ -7,6 +7,36 @@ import "./Header.scss";
 import logo from "../../statics/logo.png";
 import redPacket from "../../statics/redPacket.png";
 
+const getListArea = (show) => {
+  if (show) {
+    return (
+      <div className="searchInfo">
+                      <div className="searchTop">
+                        <div className="searchinfoTitle">
+                          热门搜索
+                        </div>
+                        <div className="searchSwitch">
+                            <i className="iconfont">&#xe66d;</i>
+                            <sapn>换一换</sapn>
+                        </div>
+                      </div> 
+                      <div className="searchContent">
+                        <div>教育</div>
+                        <div>教育</div>
+                        <div>教育</div>
+                        <div>教育</div>
+                        <div>教育</div>
+                        <div>教育</div>
+                        <div>教育</div>
+                        <div>教育</div>
+                        <div>教育</div>                        
+                      </div>
+                    </div>
+    )
+  }
+}
+
+
 const Header = (props) => {
   return (
     <div className="box">
@@ -43,6 +73,7 @@ const Header = (props) => {
                       onBlur={props.inputBlur}
                     />
                     <i className="iconfont">&#xe601;</i>
+                    {getListArea(props.focused)}
                   </li>
                   </CSSTransition>
                 <li>
