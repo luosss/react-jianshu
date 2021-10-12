@@ -140,7 +140,7 @@ class Header extends Component {
     });
   };
   render() {
-    const { focused, inputFocus, inputBlur } = this.props;
+    const { focused, inputFocus, inputBlur, list } = this.props;
     return (
       <div className="box">
         <div className="headerwrapp">
@@ -172,7 +172,7 @@ class Header extends Component {
                   <li className="search ">
                     <input
                       type="text"
-                      onFocus={inputFocus}
+                      onFocus={() => inputFocus(list)}
                       onBlur={inputBlur}
                     />
                     <i className="iconfont">&#xe601;</i>
@@ -217,9 +217,10 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    inputFocus() {
+    inputFocus(list) {
+      console.log(list);
+      list.size === 0 && dispatch(actionCreators.getList());
       dispatch(actionCreators.searchFoucus());
-      dispatch(actionCreators.getList());
     },
     inputBlur() {
       dispatch(actionCreators.searchBlur());
