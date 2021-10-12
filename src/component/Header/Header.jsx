@@ -1,43 +1,13 @@
-import React from "react";
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 // import  * as actionCreators  from './store/actionCreators'
 import { actionCreators } from "./store";
-import { CSSTransition} from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import "./Header.scss";
 import logo from "../../statics/logo.png";
 import redPacket from "../../statics/redPacket.png";
 
-const getListArea = (show) => {
-  if (show) {
-    return (
-      <div className="searchInfo">
-                      <div className="searchTop">
-                        <div className="searchinfoTitle">
-                          热门搜索
-                        </div>
-                        <div className="searchSwitch">
-                            <i className="iconfont">&#xe66d;</i>
-                            <sapn>换一换</sapn>
-                        </div>
-                      </div> 
-                      <div className="searchContent">
-                        <div>教育</div>
-                        <div>教育</div>
-                        <div>教育</div>
-                        <div>教育</div>
-                        <div>教育</div>
-                        <div>教育</div>
-                        <div>教育</div>
-                        <div>教育</div>
-                        <div>教育</div>                        
-                      </div>
-                    </div>
-    )
-  }
-}
-
-
-const Header = (props) => {
+/* const Header = (props) => {
   return (
     <div className="box">
         <div className="headerwrapp">
@@ -100,14 +70,35 @@ const Header = (props) => {
         </div>
       </div>
   )
-}
+} */
 
-
-/*  class Header extends Component {
+class Header extends Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
+  getListArea = () => {
+    if (this.props.focused) {
+      return (
+        <div className="searchInfo">
+          <div className="searchTop">
+            <div className="searchinfoTitle">热门搜索</div>
+            <div className="searchSwitch">
+              <i className="iconfont">&#xe66d;</i>
+              <span>换一换</span>
+            </div>
+          </div>
+          <div className="searchContent">
+            {this.props.list.map((item) => {
+              return <div key={item}>{item}</div>;
+            })}
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
   inputFocus = () => {
     this.setState({
       focused: true,
@@ -115,9 +106,9 @@ const Header = (props) => {
   };
   inputBlur = () => {
     this.setState({
-      focused: false
-    })
-  }
+      focused: false,
+    });
+  };
   render() {
     return (
       <div className="box">
@@ -146,7 +137,11 @@ const Header = (props) => {
                     <span>IT技术</span>
                   </a>
                 </li>
-                <CSSTransition in={this.props.focused} timeout={1000} classNames='slide' >
+                <CSSTransition
+                  in={this.props.focused}
+                  timeout={1000}
+                  classNames="slide"
+                >
                   <li className="search ">
                     <input
                       type="text"
@@ -154,8 +149,9 @@ const Header = (props) => {
                       onBlur={this.props.inputBlur}
                     />
                     <i className="iconfont">&#xe601;</i>
+                    {this.getListArea()}
                   </li>
-                  </CSSTransition>
+                </CSSTransition>
                 <li>
                   <div className="redpacketdiv">
                     <img className="redpacket" src={redPacket} alt="" />
@@ -163,7 +159,6 @@ const Header = (props) => {
                   </div>
                 </li>
               </ul>
-              
             </div>
             <div className="right">
               <div>
@@ -181,24 +176,25 @@ const Header = (props) => {
       </div>
     );
   }
-} */
+}
 
 const mapStateToProps = (state) => {
-  
   return {
     // focused: state.get('header').get('focused')  //由于将store放到了组件自身目录下的reducer,所以需要加个header
-    focused: state.getIn(['header','focused'])
-  }
-}
+    focused: state.getIn(["header", "focused"]),
+    list: state.getIn(["header", "list"]),
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     inputFocus() {
-      dispatch(actionCreators.searchFoucus())
+      dispatch(actionCreators.searchFoucus());
+      dispatch(actionCreators.getList());
     },
     inputBlur() {
-      dispatch(actionCreators.searchBlur())
-    }
-  }
-}
+      dispatch(actionCreators.searchBlur());
+    },
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
